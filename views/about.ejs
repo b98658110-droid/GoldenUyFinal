@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>GoldenUy — О нас</title>
+    <%- include('partials/head') %>
+    <style>
+        .about-hero { background: linear-gradient(135deg, #111111 0%, #1f2937 100%); padding: 70px 0; text-align: center; }
+        .about-title { color: #fff; font-size: 36px; font-weight: 800; line-height: 1.35; }
+        .about-subtitle { color: #cbd5e1; font-size: 16px; max-width: 700px; margin: 18px auto 0; }
+        .about-grid { padding: 60px 0; display: flex; flex-direction: column; gap: 50px; }
+        .mission-section { display: grid; grid-template-columns: 1.4fr 1fr; gap: 36px; align-items: start; }
+        .mission-text h3 { font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 16px; }
+        .mission-text p { color: #475569; line-height: 1.7; margin-bottom: 14px; }
+        .stats-highlight { background: #fff; border-radius: 24px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        .stats-highlight .stats-row { display: flex; justify-content: space-between; gap: 16px; }
+        .stat-item { text-align: center; }
+        .stat-item .stat-number { font-size: 28px; font-weight: 800; color: #d4af37; }
+        .stat-item .stat-label { font-size: 12px; color: #64748b; margin-top: 4px; }
+        .region-showcase { background: #fff; border-radius: 28px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); text-align: center; }
+        .region-showcase h3 { font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+        .region-map { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 10px; }
+        .region-badge { background: #fef9e6; color: #92660c; padding: 10px 18px; border-radius: 30px; font-size: 14px; font-weight: 600; }
+        .team-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .value-card { background: #fff; border-radius: 20px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); text-align: center; }
+        .value-icon { width: 56px; height: 56px; border-radius: 16px; background: rgba(212,175,55,0.12); color: #d4af37; display: flex; align-items: center; justify-content: center; font-size: 22px; margin: 0 auto 16px; }
+        .value-card h4 { font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 10px; }
+        .value-card p { font-size: 14px; color: #64748b; line-height: 1.6; }
+        .cta-section { background: #111111; border-radius: 28px; padding: 48px; text-align: center; }
+        .cta-section h3 { color: #fff; font-size: 26px; font-weight: 800; margin-bottom: 12px; }
+        .cta-section p { color: #cbd5e1; max-width: 600px; margin: 0 auto 24px; }
+        .btn-gold { background: #d4af37; color: #111; padding: 14px 32px; border-radius: 40px; font-weight: 700; }
+        @media (max-width: 900px) {
+            .mission-section, .team-values { grid-template-columns: 1fr; }
+            .about-title { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+<%- include('partials/header') %>
+
+<main>
+    <div class="about-hero">
+        <div class="container">
+            <h1 class="about-title">Ваш надёжный партнёр<br>в мире недвижимости Узбекистана</h1>
+            <p class="about-subtitle">
+                GoldenUy объединяет продавцов и покупателей по всей республике: от древнего Хивы
+                до современного Ташкента. Прозрачные сделки и актуальные цены.
+            </p>
+        </div>
+    </div>
+
+    <div class="container about-grid">
+        <div class="mission-section">
+            <div class="mission-text">
+                <h3>О проекте GoldenUy</h3>
+                <p>
+                    Мы запустили платформу, чтобы сделать рынок жилья в Узбекистане максимально открытым
+                    и удобным. Здесь каждый найдёт дом мечты — от компактных квартир в новостройках
+                    до просторных домов с участком. Наша цель — соединить продавцов и покупателей
+                    без посредников, экономя время и деньги.
+                </p>
+                <p>
+                    GoldenUy — это не просто доска объявлений, а удобная экосистема: понятный каталог,
+                    личные избранное и корзина, прямые контакты с продавцами. Каждый день люди выбирают
+                    нас, чтобы продать или купить недвижимость в Узбекистане.
+                </p>
+            </div>
+            <div class="stats-highlight">
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-number">2500+</div>
+                        <div class="stat-label">Активных объявлений</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">14</div>
+                        <div class="stat-label">Регионов Узбекистана</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Довольных клиентов</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="region-showcase">
+            <h3><i class="fa-solid fa-map-location-dot" style="color:#d4af37;"></i> Продажа недвижимости по всему Узбекистану</h3>
+            <p style="color:#475569; margin-bottom: 10px;">От столицы до живописных уголков — мы охватываем ключевые города и регионы.</p>
+            <div class="region-map">
+                <span class="region-badge"><i class="fa-solid fa-city"></i> Ташкент</span>
+                <span class="region-badge"><i class="fa-solid fa-landmark"></i> Самарканд</span>
+                <span class="region-badge"><i class="fa-solid fa-mosque"></i> Бухара</span>
+                <span class="region-badge"><i class="fa-solid fa-tree"></i> Фергана</span>
+                <span class="region-badge"><i class="fa-solid fa-mountain"></i> Наманган</span>
+                <span class="region-badge"><i class="fa-solid fa-water"></i> Хива</span>
+                <span class="region-badge"><i class="fa-solid fa-tractor"></i> Андижан</span>
+                <span class="region-badge"><i class="fa-solid fa-sun"></i> Карши</span>
+                <span class="region-badge"><i class="fa-solid fa-cloud-sun"></i> Термез</span>
+                <span class="region-badge"><i class="fa-solid fa-road"></i> Джизак</span>
+                <span class="region-badge"><i class="fa-solid fa-industry"></i> Ангрен</span>
+                <span class="region-badge"><i class="fa-solid fa-house"></i> Нукус</span>
+            </div>
+        </div>
+
+        <div class="team-values">
+            <div class="value-card">
+                <div class="value-icon"><i class="fa-solid fa-handshake"></i></div>
+                <h4>Честность и доверие</h4>
+                <p>Мы тщательно модерируем объявления, чтобы вы не столкнулись с мошенниками — каждый объект от реальных собственников или проверенных агентов.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon"><i class="fa-solid fa-chart-simple"></i></div>
+                <h4>Прозрачные цены</h4>
+                <p>Чёткое отображение цены каждого объекта без скрытых платежей — удобно для покупателей и инвесторов.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon"><i class="fa-solid fa-globe"></i></div>
+                <h4>Все регионы Узбекистана</h4>
+                <p>Наша география охватывает крупные города и районы — от Ташкента до Каракалпакстана.</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Готовы продать или найти дом?</h3>
+            <p>Свяжитесь с нами в Telegram, чтобы разместить объявление или получить консультацию по подбору недвижимости.</p>
+            <a href="https://t.me/" target="_blank" class="btn-gold" style="text-decoration:none; display:inline-block;">
+                <i class="fa-solid fa-circle-plus"></i> Подать объявление
+            </a>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer') %>
+
+</body>
+</html>

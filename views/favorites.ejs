@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Избранное — GoldenUy</title>
+    <%- include('partials/head') %>
+</head>
+<body>
+
+<%- include('partials/header', { activePage: 'favorites' }) %>
+
+<main>
+    <% if (properties.length === 0) { %>
+        <div class="favorites-empty">
+            <div class="empty-icon"><i class="fa-regular fa-heart"></i></div>
+            <h1 class="empty-title">Список избранного пуст</h1>
+            <p class="empty-message">
+                Вы пока не добавили ни одного объекта в избранное.
+                Перейдите в <a href="/">каталог</a>, чтобы найти подходящую недвижимость.
+            </p>
+        </div>
+    <% } else { %>
+        <section class="offers-section" style="padding-top:40px;">
+            <div class="container">
+                <div class="offers-header">
+                    <h3>Избранное</h3>
+                    <span class="view-all"><%= properties.length %> объектов</span>
+                </div>
+                <div class="property-grid">
+                    <% properties.forEach(function(property) { %>
+                        <%- include('partials/property-card', { property, favoriteIds, cartIds }) %>
+                    <% }) %>
+                </div>
+            </div>
+        </section>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

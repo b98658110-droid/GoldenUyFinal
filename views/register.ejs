@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Регистрация — GoldenUy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body class="auth-body">
+
+<div class="auth-wrap">
+    <div class="auth-card">
+        <div class="tabs">
+            <a href="/login" class="tab-btn"><i class="fa-solid fa-right-to-bracket"></i>Вход</a>
+            <a href="/register" class="tab-btn active-tab"><i class="fa-solid fa-user-plus"></i>Регистрация</a>
+        </div>
+
+        <div class="auth-panel">
+            <h2 class="form-title">Создать аккаунт</h2>
+            <p class="form-sub">Регистрация займёт меньше минуты — и вы сможете сохранять объекты в избранное и корзину.</p>
+
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="auth-error"><%= error %></div>
+            <% } %>
+
+            <form action="/register" method="POST">
+                <div class="input-group">
+                    <label><i class="fa-regular fa-user"></i>Имя</label>
+                    <input type="text" name="name" placeholder="Ваше имя" value="<%= typeof oldName !== 'undefined' ? oldName : '' %>" required>
+                </div>
+                <div class="input-group">
+                    <label><i class="fa-regular fa-envelope"></i>Email</label>
+                    <input type="email" name="email" placeholder="you@example.com" value="<%= typeof oldEmail !== 'undefined' ? oldEmail : '' %>" required>
+                </div>
+                <div class="input-group">
+                    <label><i class="fa-solid fa-lock"></i>Пароль</label>
+                    <input type="password" name="password" placeholder="Минимум 6 символов" minlength="6" required>
+                </div>
+                <div class="input-group">
+                    <label><i class="fa-solid fa-lock"></i>Повторите пароль</label>
+                    <input type="password" name="passwordConfirm" placeholder="Повторите пароль" minlength="6" required>
+                </div>
+
+                <div class="checkbox-row">
+                    <input type="checkbox" id="agree" name="agree" required>
+                    <label for="agree">Я согласен с условиями использования</label>
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    <i class="fa-solid fa-user-plus"></i> Зарегистрироваться
+                </button>
+            </form>
+
+            <div class="alternative">
+                Уже есть аккаунт?<a href="/login">Войти</a>
+            </div>
+
+            <div class="info-note">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Регистрация бесплатна и занимает меньше минуты.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

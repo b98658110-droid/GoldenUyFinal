@@ -1,0 +1,242 @@
+/* =======================================================
+   public/css/auth.css
+   Стили страниц входа и регистрации (login.ejs, register.ejs).
+   Перенесено из исходной вёрстки register.html.
+======================================================= */
+
+body.auth-body {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e2edf7 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.auth-wrap {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.auth-card {
+    background: #ffffff;
+    border-radius: 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    transition: 0.3s;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.auth-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.2);
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #eef2f8;
+    background: #fafdff;
+}
+
+.tab-btn {
+    flex: 1;
+    text-align: center;
+    padding: 18px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #64748b;
+    text-decoration: none;
+    transition: 0.2s;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    letter-spacing: 0.3px;
+}
+
+.tab-btn.active-tab {
+    color: #d4af37;
+    border-bottom: 3px solid #d4af37;
+}
+
+.tab-btn i {
+    margin-right: 8px;
+    color: #d4af37;
+}
+
+.tab-btn:hover {
+    color: #d4af37;
+    background: #fef9e6;
+}
+
+.auth-panel {
+    padding: 36px 32px 42px;
+}
+
+.form-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+}
+
+.form-sub {
+    color: #475569;
+    font-size: 14px;
+    margin-bottom: 28px;
+    border-left: 4px solid #d4af37;
+    padding-left: 14px;
+    line-height: 1.4;
+}
+
+.input-group {
+    margin-bottom: 22px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.input-group label i {
+    color: #d4af37;
+    width: 24px;
+    margin-right: 6px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    font-size: 15px;
+    transition: 0.2s;
+    background: #ffffff;
+    font-weight: 500;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 18px 0 24px;
+    flex-wrap: wrap;
+}
+
+.checkbox-row input {
+    width: 18px;
+    height: 18px;
+    accent-color: #d4af37;
+    cursor: pointer;
+}
+
+.checkbox-row label {
+    font-size: 14px;
+    color: #334155;
+    cursor: pointer;
+}
+
+.forgot-link {
+    margin-left: auto;
+    font-size: 13px;
+    color: #d4af37;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    background: #d4af37;
+    border: none;
+    border-radius: 40px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #111111;
+    cursor: pointer;
+    transition: 0.25s;
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-btn i {
+    font-size: 18px;
+}
+
+.auth-btn:hover {
+    background: #e2bc3b;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+}
+
+.alternative {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    color: #475569;
+}
+
+.alternative a {
+    color: #d4af37;
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 6px;
+}
+
+.alternative a:hover {
+    text-decoration: underline;
+}
+
+.info-note {
+    background: #fef9e6;
+    border-radius: 18px;
+    padding: 16px 18px;
+    margin-top: 28px;
+    font-size: 13px;
+    color: #b45309;
+    border-left: 4px solid #d4af37;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.info-note i {
+    font-size: 20px;
+    color: #d4af37;
+}
+
+.auth-error {
+    background: #fee2e2;
+    color: #991b1b;
+    border-left: 4px solid #ef4444;
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 540px) {
+    body.auth-body { padding: 20px 16px; }
+    .auth-panel { padding: 28px 20px 34px; }
+    .form-title { font-size: 24px; }
+    .checkbox-row { flex-direction: column; align-items: flex-start; }
+    .forgot-link { margin-left: 0; margin-top: 5px; }
+}

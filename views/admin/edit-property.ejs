@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Редактировать объект — GoldenUy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+
+<%- include('../partials/admin-sidebar', { activePage: 'dashboard' }) %>
+
+<div class="admin-content">
+    <div class="admin-topbar">
+        <div>
+            <h1>Редактировать объект</h1>
+            <p>Изменение данных объявления #<%= property.id %></p>
+        </div>
+    </div>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="flash-message flash-error" style="margin:0 0 20px;"><%= error %></div>
+    <% } %>
+
+    <div class="admin-form-card">
+        <form action="/admin/properties/edit/<%= property.id %>" method="POST" enctype="multipart/form-data">
+            <div class="form-grid">
+                <div class="admin-field full-width">
+                    <label>Название объявления</label>
+                    <input type="text" name="title" value="<%= property.title %>" required>
+                </div>
+
+                <div class="admin-field">
+                    <label>Цена ($)</label>
+                    <input type="number" name="price" min="0" step="0.01" value="<%= property.price %>" required>
+                </div>
+
+                <div class="admin-field">
+                    <label>Тип недвижимости</label>
+                    <select name="type" required>
+                        <option value="квартира" <%= property.type === 'квартира' ? 'selected' : '' %>>Квартира</option>
+                        <option value="дом" <%= property.type === 'дом' ? 'selected' : '' %>>Дом</option>
+                        <option value="участок" <%= property.type === 'участок' ? 'selected' : '' %>>Участок</option>
+                    </select>
+                </div>
+
+                <div class="admin-field">
+                    <label>Город</label>
+                    <input type="text" name="city" value="<%= property.city %>" required>
+                </div>
+
+                <div class="admin-field">
+                    <label>Район</label>
+                    <input type="text" name="district" value="<%= property.district || '' %>">
+                </div>
+
+                <div class="admin-field">
+                    <label>Количество комнат</label>
+                    <input type="number" name="rooms" min="0" value="<%= property.rooms || '' %>">
+                </div>
+
+                <div class="admin-field">
+                    <label>Площадь (м²)</label>
+                    <input type="number" name="area" min="0" step="0.1" value="<%= property.area || '' %>">
+                </div>
+
+                <div class="admin-field full-width">
+                    <label>Описание</label>
+                    <textarea name="description"><%= property.description || '' %></textarea>
+                </div>
+
+                <div class="admin-field full-width">
+                    <label>Фотография объекта</label>
+
+                    <% if (property.image) { %>
+                        <div class="current-image-preview">
+                            <img src="/<%= property.image %>" alt="Текущее фото">
+                            <span>Текущее фото. Загрузите новое, чтобы заменить.</span>
+                        </div>
+                    <% } %>
+
+                    <label for="image" class="file-drop" style="cursor:pointer; display:block; margin-top:12px;">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        Нажмите, чтобы выбрать новое фото (необязательно)
+                    </label>
+                    <input type="file" id="image" name="image" accept="image/*" style="display:none;" onchange="document.getElementById('fileNameLabel').textContent = this.files[0] ? this.files[0].name : '';">
+                    <div id="fileNameLabel" style="margin-top:8px; font-size:13px; color:#475569;"></div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit"><i class="fa-solid fa-check"></i> Сохранить изменения</button>
+                <a href="/admin/dashboard" class="btn-cancel">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

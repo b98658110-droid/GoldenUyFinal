@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>GoldenUy — Недвижимость по всему Узбекистану</title>
+    <%- include('partials/head') %>
+</head>
+<body>
+
+<%- include('partials/header', { activePage: 'home' }) %>
+
+<% if (typeof flashError !== 'undefined' && flashError) { %>
+    <div class="flash-message flash-error"><%= flashError %></div>
+<% } %>
+<% if (typeof flashSuccess !== 'undefined' && flashSuccess) { %>
+    <div class="flash-message flash-success"><%= flashSuccess %></div>
+<% } %>
+
+<!-- Выпадающая панель фильтров каталога -->
+<div class="catalog-panel" id="catalogPanel">
+    <div class="container">
+        <form action="/" method="GET" class="catalog-content">
+            <div class="filter-box">
+                <label>Город</label>
+                <input type="text" name="city" placeholder="Например, Ташкент" value="<%= filters.city || '' %>">
+            </div>
+            <div class="filter-box">
+                <label>Район</label>
+                <input type="text" name="district" placeholder="Район" value="<%= filters.district || '' %>">
+            </div>
+            <div class="filter-box">
+                <label>Тип</label>
+                <select name="type" class="filter-select">
+                    <option value="">Любой</option>
+                    <option value="квартира" <%= filters.type === 'квартира' ? 'selected' : '' %>>Квартира</option>
+                    <option value="дом" <%= filters.type === 'дом' ? 'selected' : '' %>>Дом</option>
+                    <option value="участок" <%= filters.type === 'участок' ? 'selected' : '' %>>Участок</option>
+                </select>
+            </div>
+            <div class="filter-box">
+                <label>Цена от ($)</label>
+                <input type="number" name="minPrice" placeholder="0" value="<%= filters.minPrice || '' %>">
+            </div>
+            <div class="filter-box">
+                <label>Цена до ($)</label>
+                <input type="number" name="maxPrice" placeholder="Без ограничений" value="<%= filters.maxPrice || '' %>">
+            </div>
+            <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i> Найти</button>
+        </form>
+    </div>
+</div>
+
+<main>
+    <section class="main-hero">
+        <div class="container">
+            <h2>Найдите недвижимость своей мечты в любом городе Узбекистана</h2>
+            <p>Квартиры, дома и участки от проверенных продавцов. Удобный поиск, избранное и личная корзина объектов.</p>
+            <button id="catalogToggle" class="btn-large" onclick="toggleCatalogPanel(event)">
+                <i class="fa-solid fa-sliders"></i> Открыть фильтры поиска
+            </button>
+        </div>
+    </section>
+
+    <section class="offers-section" id="offers">
+        <div class="container">
+            <div class="offers-header">
+                <h3>Актуальные предложения</h3>
+                <span class="view-all"><%= properties.length %> объектов найдено</span>
+            </div>
+
+            <div class="property-grid">
+                <% if (properties.length === 0) { %>
+                    <div class="empty-grid-msg">
+                        По заданным фильтрам ничего не найдено. Попробуйте изменить параметры поиска.
+                    </div>
+                <% } else { %>
+                    <% properties.forEach(function(property) { %>
+                        <%- include('partials/property-card', { property, favoriteIds, cartIds }) %>
+                    <% }) %>
+                <% } %>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

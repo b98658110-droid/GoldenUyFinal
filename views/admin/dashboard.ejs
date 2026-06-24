@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Админ-панель — GoldenUy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+
+<%- include('../partials/admin-sidebar', { activePage: 'dashboard' }) %>
+
+<div class="admin-content">
+    <div class="admin-topbar">
+        <div>
+            <h1>Объявления</h1>
+            <p>Управление объектами недвижимости на сайте</p>
+        </div>
+        <a href="/admin/properties/add" class="admin-add-btn">
+            <i class="fa-solid fa-plus"></i> Добавить объект
+        </a>
+    </div>
+
+    <% if (typeof flashSuccess !== 'undefined' && flashSuccess) { %>
+        <div class="flash-message flash-success" style="margin:0 0 20px;"><%= flashSuccess %></div>
+    <% } %>
+
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-house"></i></div>
+            <div>
+                <div class="stat-number"><%= stats.total %></div>
+                <div class="stat-label">Всего объектов</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-building"></i></div>
+            <div>
+                <div class="stat-number"><%= stats.apartments %></div>
+                <div class="stat-label">Квартир</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-house-chimney"></i></div>
+            <div>
+                <div class="stat-number"><%= stats.houses %></div>
+                <div class="stat-label">Домов</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+            <div>
+                <div class="stat-number"><%= stats.users %></div>
+                <div class="stat-label">Пользователей</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-table-wrap">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Фото</th>
+                    <th>Название</th>
+                    <th>Город</th>
+                    <th>Тип</th>
+                    <th>Цена</th>
+                    <th>Добавлено</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (properties.length === 0) { %>
+                    <tr class="empty-table-row">
+                        <td colspan="7">Объявлений пока нет. Нажмите «Добавить объект», чтобы создать первое.</td>
+                    </tr>
+                <% } else { %>
+                    <% properties.forEach(function(property) { %>
+                        <tr>
+                            <td>
+                                <img
+                                    src="<%= property.image ? '/' + property.image : '/images/no-photo.svg' %>"
+                                    alt="<%= property.title %>"
+                                    class="table-thumb"
+                                >
+                            </td>
+                            <td class="table-title"><%= property.title %></td>
+                            <td><%= property.city %></td>
+                            <td><%= property.type %></td>
+                            <td><%= Number(property.price).toLocaleString('ru-RU') %> $</td>
+                            <td><%= new Date(property.created_at).toLocaleDateString('ru-RU') %></td>
+                            <td>
+                                <div class="table-actions">
+                                    <a href="/admin/properties/edit/<%= property.id %>" class="icon-btn edit" title="Редактировать">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <form action="/admin/properties/delete/<%= property.id %>" method="POST" onsubmit="return confirm('Удалить этот объект?');">
+                                        <button type="submit" class="icon-btn delete" title="Удалить">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

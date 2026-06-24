@@ -1,0 +1,40 @@
+<%
+/*
+  Партиал header.ejs
+  Ожидает (необязательно) переменную activePage: 'home' | 'favorites' | 'cart'
+  для подсветки активного пункта меню.
+  currentUser доступен автоматически во всех шаблонах через middleware attachUser.
+*/
+const active = typeof activePage !== 'undefined' ? activePage : '';
+%>
+<header class="header">
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+        <a href="/" class="logo"><i class="fa-solid fa-building-columns"></i> GoldenUy</a>
+
+        <nav class="nav-links">
+            <a href="/" class="nav-link <%= active === 'home' ? 'active' : '' %>">Главная</a>
+            <a href="/#offers" class="nav-link">Каталог</a>
+            <a href="/favorites" class="nav-link <%= active === 'favorites' ? 'active' : '' %>">
+                <i class="fa-regular fa-heart"></i> Избранное
+            </a>
+            <a href="/cart" class="nav-link <%= active === 'cart' ? 'active' : '' %>">
+                <i class="fa-solid fa-cart-shopping"></i> Корзина
+            </a>
+        </nav>
+
+        <div class="nav-actions">
+            <% if (currentUser) { %>
+                <% if (currentUser.role === 'admin') { %>
+                    <a href="/admin/dashboard" class="nav-link"><i class="fa-solid fa-gauge"></i> Админка</a>
+                <% } %>
+                <span class="nav-link" style="cursor:default;"><i class="fa-regular fa-user"></i> <%= currentUser.name %></span>
+                <form action="/logout" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-secondary">Выйти</button>
+                </form>
+            <% } else { %>
+                <a href="/login" class="btn btn-secondary">Войти</a>
+                <a href="/register" class="btn btn-primary">Регистрация</a>
+            <% } %>
+        </div>
+    </div>
+</header>

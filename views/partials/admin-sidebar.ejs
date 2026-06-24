@@ -1,0 +1,28 @@
+<%
+const active = typeof activePage !== 'undefined' ? activePage : '';
+%>
+<aside class="admin-sidebar">
+    <a href="/admin/dashboard" class="admin-logo"><i class="fa-solid fa-building-columns"></i> GoldenUy</a>
+    <ul class="admin-nav">
+        <li>
+            <a href="/admin/dashboard" class="<%= active === 'dashboard' ? 'active' : '' %>">
+                <i class="fa-solid fa-gauge"></i> Объявления
+            </a>
+        </li>
+        <li>
+            <a href="/admin/properties/add" class="<%= active === 'add' ? 'active' : '' %>">
+                <i class="fa-solid fa-plus"></i> Добавить объект
+            </a>
+        </li>
+        <li>
+            <a href="/" target="_blank">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Открыть сайт
+            </a>
+        </li>
+    </ul>
+    <div class="admin-logout">
+        <form action="/logout" method="POST">
+            <button type="submit"><i class="fa-solid fa-right-from-bracket"></i> Выйти</button>
+        </form>
+    </div>
+</aside>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Корзина — GoldenUy</title>
+    <%- include('partials/head') %>
+    <style>
+        .cart-layout { display: grid; grid-template-columns: 1fr 320px; gap: 32px; align-items: start; }
+        .cart-summary-card { background: #fff; border-radius: 18px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); position: sticky; top: 100px; }
+        .cart-summary-card h3 { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 18px; }
+        .cart-summary-row { display: flex; justify-content: space-between; font-size: 14px; color: #475569; margin-bottom: 12px; }
+        .cart-summary-total { display: flex; justify-content: space-between; font-size: 20px; font-weight: 800; color: #0f172a; border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 8px; }
+        @media (max-width: 900px) {
+            .cart-layout { grid-template-columns: 1fr; }
+            .cart-summary-card { position: static; }
+        }
+    </style>
+</head>
+<body>
+
+<%- include('partials/header', { activePage: 'cart' }) %>
+
+<main>
+    <% if (properties.length === 0) { %>
+        <div class="favorites-empty" id="cart-empty-state">
+            <div class="empty-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+            <h1 class="empty-title">Корзина пуста</h1>
+            <p class="empty-message">
+                Вы пока не добавили ни одного объекта в корзину.
+                Перейдите в <a href="/">каталог</a>, чтобы выбрать недвижимость.
+            </p>
+        </div>
+    <% } else {
+        const total = properties.reduce(function(sum, p) { return sum + Number(p.price); }, 0);
+    %>
+        <section class="offers-section" style="padding-top:40px;">
+            <div class="container">
+                <div class="offers-header">
+                    <h3>Корзина</h3>
+                    <span class="view-all"><span id="cart-count"><%= properties.length %></span> объектов</span>
+                </div>
+
+                <div class="cart-layout">
+                    <div class="property-grid" id="cart-grid" style="grid-template-columns: repeat(2, 1fr);">
+                        <% properties.forEach(function(property) { %>
+                            <%- include('partials/property-card', { property, favoriteIds, cartIds }) %>
+                        <% }) %>
+                    </div>
+
+                    <aside class="cart-summary-card" id="cart-summary">
+                        <h3>Итого</h3>
+                        <div class="cart-summary-row">
+                            <span>Объектов в корзине</span>
+                            <span><%= properties.length %></span>
+                        </div>
+                        <div class="cart-summary-total">
+                            <span>Сумма</span>
+                            <span id="cart-total"><%= total.toLocaleString('ru-RU') %> $</span>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

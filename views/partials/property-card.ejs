@@ -1,0 +1,53 @@
+<%
+/*
+  Партиал property-card.ejs
+  Ожидает переменную `property` (одна запись из таблицы properties)
+  и доступ к массивам favoriteIds / cartIds (id объектов, которые
+  у текущего пользователя в избранном/корзине) — передаются из роута,
+  чтобы сразу отрисовать правильное состояние кнопок без лишних запросов.
+*/
+const isLiked = typeof favoriteIds !== 'undefined' && favoriteIds.includes(property.id);
+const isInCart = typeof cartIds !== 'undefined' && cartIds.includes(property.id);
+const imgSrc = property.image ? '/' + property.image : '/images/no-photo.svg';
+%>
+<div class="property-card-wrap" style="position:relative;">
+    <button
+        class="like-btn <%= isLiked ? 'liked' : '' %>"
+        data-property-id="<%= property.id %>"
+        onclick="toggleFavorite(event, <%= property.id %>)"
+        title="В избранное"
+    >
+        <i class="<%= isLiked ? 'fa-solid' : 'fa-regular' %> fa-heart"></i>
+    </button>
+
+    <a href="/property/<%= property.id %>" class="property-card">
+        <div class="card-image-box">
+            <img src="<%= imgSrc %>" alt="<%= property.title %>" class="card-img">
+        </div>
+        <div class="card-info">
+            <div class="card-price">
+                <%= Number(property.price).toLocaleString('ru-RU') %> $
+            </div>
+            <div class="card-title"><%= property.title %></div>
+            <div class="card-location">
+                <i class="fa-solid fa-location-dot"></i>
+                <%= property.city %><%= property.district ? ', ' + property.district : '' %>
+            </div>
+            <div class="card-features">
+                <span><i class="fa-solid fa-ruler-combined"></i> <%= property.area %> м²</span>
+                <span><i class="fa-solid fa-door-open"></i> <%= property.rooms %> комн.</span>
+                <span><i class="fa-solid fa-house"></i> <%= property.type %></span>
+            </div>
+        </div>
+    </a>
+
+    <div style="padding: 0 20px 20px;">
+        <button
+            class="btn-card <%= isInCart ? 'in-cart' : '' %>"
+            data-property-id="<%= property.id %>"
+            onclick="toggleCart(event, <%= property.id %>)"
+        >
+            <%= isInCart ? '✓ В корзине' : 'Добавить в корзину' %>
+        </button>
+    </div>
+</div>

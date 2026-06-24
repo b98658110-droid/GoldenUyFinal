@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Добавить объект — GoldenUy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+
+<%- include('../partials/admin-sidebar', { activePage: 'add' }) %>
+
+<div class="admin-content">
+    <div class="admin-topbar">
+        <div>
+            <h1>Добавить объект</h1>
+            <p>Заполните данные нового объявления</p>
+        </div>
+    </div>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="flash-message flash-error" style="margin:0 0 20px;"><%= error %></div>
+    <% } %>
+
+    <div class="admin-form-card">
+        <form action="/admin/properties/add" method="POST" enctype="multipart/form-data">
+            <div class="form-grid">
+                <div class="admin-field full-width">
+                    <label>Название объявления</label>
+                    <input type="text" name="title" placeholder="Например: 3-комнатная квартира в центре" value="<%= typeof old !== 'undefined' ? old.title : '' %>" required>
+                </div>
+
+                <div class="admin-field">
+                    <label>Цена ($)</label>
+                    <input type="number" name="price" placeholder="50000" min="0" step="0.01" value="<%= typeof old !== 'undefined' ? old.price : '' %>" required>
+                </div>
+
+                <div class="admin-field">
+                    <label>Тип недвижимости</label>
+                    <select name="type" required>
+                        <option value="">Выберите тип</option>
+                        <option value="квартира">Квартира</option>
+                        <option value="дом">Дом</option>
+                        <option value="участок">Участок</option>
+                    </select>
+                </div>
+
+                <div class="admin-field">
+                    <label>Город</label>
+                    <input type="text" name="city" placeholder="Ташкент" value="<%= typeof old !== 'undefined' ? old.city : '' %>" required>
+                </div>
+
+                <div class="admin-field">
+                    <label>Район</label>
+                    <input type="text" name="district" placeholder="Юнусабадский район" value="<%= typeof old !== 'undefined' ? old.district : '' %>">
+                </div>
+
+                <div class="admin-field">
+                    <label>Количество комнат</label>
+                    <input type="number" name="rooms" placeholder="3" min="0" value="<%= typeof old !== 'undefined' ? old.rooms : '' %>">
+                </div>
+
+                <div class="admin-field">
+                    <label>Площадь (м²)</label>
+                    <input type="number" name="area" placeholder="75" min="0" step="0.1" value="<%= typeof old !== 'undefined' ? old.area : '' %>">
+                </div>
+
+                <div class="admin-field full-width">
+                    <label>Описание</label>
+                    <textarea name="description" placeholder="Подробное описание объекта недвижимости..."><%= typeof old !== 'undefined' ? old.description : '' %></textarea>
+                </div>
+
+                <div class="admin-field full-width">
+                    <label>Фотография объекта</label>
+                    <label for="image" class="file-drop" style="cursor:pointer; display:block;">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        Нажмите, чтобы выбрать фото (JPG, PNG)
+                    </label>
+                    <input type="file" id="image" name="image" accept="image/*" style="display:none;" onchange="document.getElementById('fileNameLabel').textContent = this.files[0] ? this.files[0].name : '';">
+                    <div id="fileNameLabel" style="margin-top:8px; font-size:13px; color:#475569;"></div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-submit"><i class="fa-solid fa-check"></i> Сохранить объект</button>
+                <a href="/admin/dashboard" class="btn-cancel">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
